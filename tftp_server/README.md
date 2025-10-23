@@ -24,17 +24,6 @@ Options:
 - `--network host`: Use host networking (required for TFTP to work properly)
 - `--name tftp`: Name the container "tftp" for easy reference
 
-## Testing the TFTP Server
-
-### From another container
-```bash
-# Get the container's IP address
-TFTP_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' tftp)
-
-# Test from a busybox container
-docker run --rm busybox tftp -g -r <filename> -l /tmp/output.txt $TFTP_IP && cat /tmp/output.txt
-```
-
 ### From the host (using host networking)
 ```bash
 # Using tftp client

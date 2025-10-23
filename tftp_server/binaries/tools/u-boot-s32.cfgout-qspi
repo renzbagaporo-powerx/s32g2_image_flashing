@@ -1,0 +1,95 @@
+# 0 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/arch/arm/mach-s32/s32-cc/s32cc.cfg"
+# 0 "<built-in>"
+# 0 "<command-line>"
+# 1 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/linux/kconfig.h" 1
+
+
+
+# 1 "include/generated/autoconf.h" 1
+# 5 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/linux/kconfig.h" 2
+# 0 "<command-line>" 2
+# 1 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/arch/arm/mach-s32/s32-cc/s32cc.cfg"
+# 11 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/arch/arm/mach-s32/s32-cc/s32cc.cfg"
+# 1 "include/config.h" 1
+
+
+# 1 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/config_uncmd_spl.h" 1
+# 4 "include/config.h" 2
+# 1 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/configs/s32g274ardb2.h" 1
+
+
+
+
+
+
+
+# 1 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/configs/s32g2.h" 1
+
+
+
+
+
+
+
+# 1 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/configs/s32g.h" 1
+
+
+
+
+
+
+
+# 1 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/configs/s32-cc.h" 1
+
+
+
+
+
+
+
+# 1 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/configs/s32.h" 1
+
+
+
+
+
+
+
+# 1 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/linux/sizes.h" 1
+# 11 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/linux/sizes.h"
+# 1 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/linux/const.h" 1
+# 12 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/linux/sizes.h" 2
+# 9 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/configs/s32.h" 2
+# 1 "include/generated/autoconf.h" 1
+# 10 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/configs/s32.h" 2
+# 9 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/configs/s32-cc.h" 2
+# 9 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/configs/s32g.h" 2
+# 9 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/configs/s32g2.h" 2
+# 9 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/configs/s32g274ardb2.h" 2
+# 5 "include/config.h" 2
+# 1 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/arch/arm/include/asm/config.h" 1
+# 6 "include/config.h" 2
+# 1 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/linux/kconfig.h" 1
+# 7 "include/config.h" 2
+# 1 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/include/config_fallbacks.h" 1
+# 8 "include/config.h" 2
+# 12 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/arch/arm/mach-s32/s32-cc/s32cc.cfg" 2
+# 34 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/arch/arm/mach-s32/s32-cc/s32cc.cfg"
+BOOT_FROM qspi
+# 93 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/arch/arm/mach-s32/s32-cc/s32cc.cfg"
+DCD WRITE 0x4 0x4009c2a4 0x21c000
+DCD WRITE 0x1 0x4009d31a 0x1
+# 113 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/arch/arm/mach-s32/s32-cc/s32cc.cfg"
+DCD WRITE 0x4 0x4009cafc 0x0
+DCD WRITE 0x4 0x4009c304 0x00010000
+DCD WRITE 0x4 0x4009cad4 0x0
+DCD WRITE 0x4 0x4009c3b8 0x00010000
+# 125 "/home/yoctouser/fsl-auto-yocto-bsp/build_s32g274ardb2/tmp/work/s32g274ardb2-fsl-linux/u-boot-s32/2022.04/git/arch/arm/mach-s32/s32-cc/s32cc.cfg"
+QSPI_PARAMS_FILE qspi_params_MX25UW51245G.bin
+
+
+
+
+
+
+ERR051257_WORKAROUND
