@@ -38,8 +38,6 @@ Example command to read SPI flash:
 S32FlashTool -fread -addr 0 -size 67108864 -i uart -p /dev/ttyUSB0 -b -f dump.bin
 ```
 
-See `s32_flash_tool_commands.txt` for additional command examples.
-
 ## Method 2: eMMC Flash
 
 Flash a complete Linux image to the board's eMMC using U-Boot and TFTP.
@@ -129,3 +127,7 @@ Adjust these values based on your network setup.
 
 - **AN13185** - Flashing Binaries to S32G-VNP-RDB2
 - **S32G-VNP-RDB2UG** - S32G-VNP-RDB2 User Guide
+
+## Misc
+
+- There is a dump of the factory SPI flash image that comes with the board in `tftp_server/binaries/rdb2-spi-flash-dump.bin`.
