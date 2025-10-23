@@ -1,0 +1,8 @@
+*.bin filter=lfs diff=lfs merge=lfs -text
+*.sdcard filter=lfs diff=lfs merge=lfs -text
+*.ext4 filter=lfs diff=lfs merge=lfs -text
+*.tar.gz filter=lfs diff=lfs merge=lfs -text
+*.cpio.gz filter=lfs diff=lfs merge=lfs -text
+*.u-boot filter=lfs diff=lfs merge=lfs -text
+*.flashimage filter=lfs diff=lfs merge=lfs -text
+*.zst filter=lfs diff=lfs merge=lfs -text

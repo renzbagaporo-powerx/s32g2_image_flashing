@@ -1,0 +1,11 @@
+setenv ethact eth_eqos
+setenv ipaddr 192.168.55.3
+setenv serverip 192.168.55.1
+setenv netmask 255.255.255.0
+
+# 792723456 bytes
+# 512 bytes / block
+# 0x17A000 blocks
+tftp A0000000 fsl-image-auto-s32g274ardb2.sdcard
+mmc rescan
+mmc write A0000000 0 17A000
