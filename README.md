@@ -123,34 +123,50 @@ See `tftp_server/README.md` for more details.
 
 ### Step 2: Flash to eMMC
 
-Use the `emmc_flash.py` script to automate the flashing process:
+1. **Boot the board to U-Boot** (ensure board is configured to boot from SPI NOR flash)
+
+2. **Configure network settings** at the U-Boot prompt:
 
 ```bash
-python3 emmc_flash.py \
-  -d /dev/ttyUSB0 \
-  -i 192.168.55.3 \
-  -n 255.255.255.0 \
-  -s 192.168.55.1 \
-  -f fsl-image-auto-s32g274ardb2.sdcard \
-  -a A0000000
+setenv ethact eth_eqos
+setenv ipaddr 192.168.55.3
+setenv serverip 192.168.55.1
+setenv netmask 255.255.255.0
 ```
 
-**Parameters:**
-- `-d, --device`: Serial device (e.g., `/dev/ttyUSB0`)
-- `-i, --ip`: IP address for the device running U-Boot
-- `-n, --netmask`: Network mask (e.g., `255.255.255.0`)
-- `-s, --server`: TFTP server IP address
-- `-f, --file`: Image file path (for block calculation; must exist locally)
-- `-a, --address`: Memory address for TFTP load (e.g., `A0000000`)
+**Network configuration:**
+- Board IP: `192.168.55.3`
+- TFTP Server IP: `192.168.55.1`
+- Netmask: `255.255.255.0`
 
-The script will:
-1. Calculate the required number of blocks based on file size
-2. Configure U-Boot network settings
-3. Download the image via TFTP to RAM
-4. Write the image to eMMC
-5. Wait for each operation to complete (no timeout)
+Adjust these values based on your network setup.
 
-See `uboot_commands.txt` for the underlying U-Boot commands being executed.
+3. **Download image via TFTP to RAM:**
+
+```bash
+tftp A0000000 fsl-image-auto-s32g274ardb2.sdcard
+```
+
+This downloads the image to memory address `0xA0000000`. Wait for the transfer to complete.
+
+4. **Write image to eMMC:**
+
+```bash
+mmc rescan
+mmc write A0000000 0 17A000
+```
+
+**Block count calculation:**
+- `17A000` (hex) = 1,548,288 blocks
+- File size: 792,723,456 bytes ÷ 512 bytes/block = 1,548,288 blocks
+- For different image sizes, calculate: `(file_size_in_bytes + 511) / 512`, then convert to hex
+
+**Example for calculating block count:**
+```bash
+# If image is 800,000,000 bytes
+echo "obase=16; (800000000 + 511) / 512" | bc
+# Result: 17D784 (use this value with mmc write)
+```
 
 ## Misc
 
@@ -186,15 +202,6 @@ git lfs pull --include="binaries/rdb2-spi-flash-dump.bin,binaries/fsl-image-flas
 ```
 
 After pulling, the files will be their actual size (typically 64 MB - 756 MB depending on the image).
-
-### Network Configuration
-
-The default network configuration for eMMC flashing assumes:
-- Board IP: `192.168.55.3`
-- Host/TFTP Server IP: `192.168.55.1`
-- Netmask: `255.255.255.0`
-
-Adjust these values based on your network setup when running `emmc_flash.py`.
 
 ### Reference Documentation
 
