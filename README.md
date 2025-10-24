@@ -11,8 +11,7 @@ This repository provides two main flashing methods:
 
 ## Prerequisites
 
-- S32G274A-RDB2 board
-- Serial connection (e.g., `/dev/ttyUSB0`)
+- S32G-VNP-RDB2 board
 - S32 Design Studio (for S32 Flash Tool)
 - Docker (for TFTP server)
 - Python 3 with pyserial (`pip3 install pyserial`)
@@ -23,8 +22,8 @@ Flash the U-Boot bootloader to SPI NOR flash using the S32 Flash Tool.
 
 ### Hardware Setup
 
-1. Configure the board boot mode switches to boot from SPI NOR flash
-2. Connect serial cable to the board
+1. Configure the board boot mode switches to boot from serial. On `S32G-VNP-RDB2UG` this is on section 3.6.
+2. Connect host to the board via it's UART0 USB port.
 
 ### Flashing
 
