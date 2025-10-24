@@ -52,13 +52,11 @@ Flash a complete Linux image to the board's eMMC using U-Boot and TFTP.
 The `tftp_server` directory contains a Docker-based TFTP server:
 
 ```bash
-cd tftp_server
-
 # Place your image file in binaries/ directory
 cp /path/to/fsl-image-auto-s32g274ardb2.sdcard binaries/
 
 # Build and run the TFTP server
-docker build -t tftp-server .
+docker build -t tftp-server -f tftp_server/Dockerfile .
 docker run -d --network host --name tftp tftp-server
 ```
 
@@ -115,7 +113,7 @@ Adjust these values based on your network setup.
 - Verify TFTP server is running: `docker ps`
 - Check connectivity: `tftp localhost -c get <filename>`
 - Ensure firewall allows UDP port 69
-- Verify file exists in `tftp_server/binaries/`
+- Verify file exists in `binaries/`
 
 ### U-Boot Not Responding
 - Verify board is booting from SPI NOR flash
@@ -126,11 +124,11 @@ Adjust these values based on your network setup.
 
 ### Factory SPI Flash Backup
 
-A dump of the factory SPI flash image is available in `tftp_server/binaries/rdb2-spi-flash-dump.bin`. This can be used to restore the board to its original factory state if needed.
+A dump of the factory SPI flash image is available in `binaries/rdb2-spi-flash-dump.bin`. This can be used to restore the board to its original factory state if needed.
 
 To restore the factory image:
 ```bash
-S32FlashTool -fwrite -addr 0 -i uart -p /dev/ttyUSB0 -b -f tftp_server/binaries/rdb2-spi-flash-dump.bin
+S32FlashTool -fwrite -addr 0 -i uart -p /dev/ttyUSB0 -b -f binaries/rdb2-spi-flash-dump.bin
 ```
 
 ### Reference Documentation

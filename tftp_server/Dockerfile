@@ -10,7 +10,7 @@ RUN apt-get update && \
 RUN mkdir -p /tftpboot
 
 # Copy binaries directory to TFTP root
-COPY binaries/ /tftpboot/
+COPY ../binaries/ /tftpboot/
 
 # Expose TFTP port
 EXPOSE 69/udp
