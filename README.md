@@ -123,9 +123,13 @@ See `tftp_server/README.md` for more details.
 
 ### Step 2: Flash to eMMC
 
-1. **Boot the board to U-Boot** (ensure board is configured to boot from SPI NOR flash)
+1. **Configure boot switches:**
+   - Boot from SPI NOR flash (to load U-Boot)
+   - Set SW3 to eMMC (OFF position) - this configures the target storage device
 
-2. **Configure network settings** at the U-Boot prompt:
+2. **Boot the board to U-Boot prompt**
+
+3. **Configure network settings** at the U-Boot prompt:
 
 ```bash
 setenv ethact eth_eqos
@@ -141,18 +145,17 @@ setenv netmask 255.255.255.0
 
 Adjust these values based on your network setup.
 
-3. **Download image via TFTP to RAM:**
+4. **Download image via TFTP to RAM:**
 
 ```bash
 tftp A0000000 fsl-image-auto-s32g274ardb2.sdcard
 ```
 
-This downloads the image to memory address `0xA0000000`. Wait for the transfer to complete.
+This downloads the image to memory address `0xA0000000`. Wait for the transfer to complete (this may take several minutes depending on image size).
 
-4. **Write image to eMMC:**
+5. **Write image to eMMC:**
 
 ```bash
-mmc rescan
 mmc write A0000000 0 17A000
 ```
 
@@ -167,6 +170,12 @@ mmc write A0000000 0 17A000
 echo "obase=16; (800000000 + 511) / 512" | bc
 # Result: 17D784 (use this value with mmc write)
 ```
+
+6. **Test the flashed image:**
+   - Power off the board
+   - Configure boot switches to boot from eMMC
+   - Power on the board
+   - The system should boot from the newly flashed eMMC image
 
 ## Misc
 
