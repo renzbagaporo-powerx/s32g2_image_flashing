@@ -22,8 +22,10 @@ Flash the U-Boot bootloader to SPI NOR flash using the S32 Flash Tool.
 
 ### Hardware Setup
 
-1. Configure the board boot mode switches to boot from serial. On `S32G-VNP-RDB2UG` this is on section 3.6.
-2. Connect host to the board via it's UART0 USB port. The following instructions assume it appears as `/dev/ttyUSB0`.
+1. Configure the board boot mode switches to boot from serial (see section 3.6 of the S32G-VNP-RDB2 User Guide)
+2. Connect host to the board via its UART0 USB port
+   - The following instructions assume the device appears as `/dev/ttyUSB0`
+   - Use `dmesg | grep tty` to find the actual device name if different
 
 ### Flashing
 
@@ -32,32 +34,66 @@ The S32 Flash Tool is included with S32 Design Studio. On Linux, it's typically 
 /usr/local/NXP/S32DS.x.y.z/S32DS/tools/S32FlashTool/
 ```
 
-Where x.y.z is the S32 Design Studio version. Assuming this location is exported as `S32FT_DIR`.
+Where `x.y.z` is your S32 Design Studio version.
 
-#### Loading the flasher firmware
-
-S32 Flash Tool needs a certain firmware running on the chip for flashing onto SPI flash. Before any operation, this firmware must be uploaded to the chip first.
-
+**Setup:** Export the tool location for convenience:
 ```bash
-$S32FT_DIR/bin/S32FlashTool -t $S32FT_DIR/targets/S32G2xx.bin -a $S32FT_DIR/flash/MX25UW51245G.bin -i uart -p /dev/ttyUSB0
+export S32FT_DIR=/usr/local/NXP/S32DS.x.y.z/S32DS/tools/S32FlashTool
 ```
 
-#### Sample NXP Auto Linux BSP 44.0 image
+#### Step 1: Load the Flasher Firmware
+
+The S32 Flash Tool requires specific firmware to be running on the chip before any SPI flash operations. This firmware must be uploaded first.
 
 ```bash
-# Erase the chip with the same size as image to flash
-$S32FT_DIR/bin/S32FlashTool -t $S32FT_DIR/targets/S32G2xx.bin -ferase -addr 0 -f ./binaries/fsl-image-flash-s32g274ardb2.flashimage -i uart -p /dev/ttyUSB0
-# Flash the iamge
-$S32FT_DIR/bin/S32FlashTool -t $S32FT_DIR/targets/S32G2xx.bin -fwrite -f ./binaries/fsl-image-flash-s32g274ardb2.flashimage -addr 0 -i uart -p /dev/ttyUSB0
+$S32FT_DIR/bin/S32FlashTool \
+  -t $S32FT_DIR/targets/S32G2xx.bin \
+  -a $S32FT_DIR/flash/MX25UW51245G.bin \
+  -i uart -p /dev/ttyUSB0
 ```
 
-#### Factory image
+**Note:** This step must be repeated each time the board is power cycled or reset.
+
+#### Step 2: Flash Your Image
+
+Choose one of the following images to flash:
+
+**Option A: NXP Auto Linux BSP 44.0 Image**
 
 ```bash
-# Erase the chip with the same size as image to flash
-$S32FT_DIR/bin/S32FlashTool -t $S32FT_DIR/targets/S32G2xx.bin -ferase -addr 0 -f ./binaries/rdb2-spi-flash-dump.bin -i uart -p /dev/ttyUSB0
+# Erase flash
+$S32FT_DIR/bin/S32FlashTool \
+  -t $S32FT_DIR/targets/S32G2xx.bin \
+  -ferase -addr 0 \
+  -f ./binaries/fsl-image-flash-s32g274ardb2.flashimage \
+  -i uart -p /dev/ttyUSB0
+
 # Flash the image
-$S32FT_DIR/bin/S32FlashTool -t $S32FT_DIR/targets/S32G2xx.bin -fwrite -f ./binaries/rdb2-spi-flash-dump.bin -addr 0 -i uart -p /dev/ttyUSB0
+$S32FT_DIR/bin/S32FlashTool \
+  -t $S32FT_DIR/targets/S32G2xx.bin \
+  -fwrite \
+  -f ./binaries/fsl-image-flash-s32g274ardb2.flashimage \
+  -addr 0 \
+  -i uart -p /dev/ttyUSB0
+```
+
+**Option B: Factory Image (Restore to Original)**
+
+```bash
+# Erase flash
+$S32FT_DIR/bin/S32FlashTool \
+  -t $S32FT_DIR/targets/S32G2xx.bin \
+  -ferase -addr 0 \
+  -f ./binaries/rdb2-spi-flash-dump.bin \
+  -i uart -p /dev/ttyUSB0
+
+# Flash the image
+$S32FT_DIR/bin/S32FlashTool \
+  -t $S32FT_DIR/targets/S32G2xx.bin \
+  -fwrite \
+  -f ./binaries/rdb2-spi-flash-dump.bin \
+  -addr 0 \
+  -i uart -p /dev/ttyUSB0
 ```
 
 ## Method 2: eMMC Flash
@@ -116,34 +152,27 @@ The script will:
 
 See `uboot_commands.txt` for the underlying U-Boot commands being executed.
 
-## Network Configuration
+## Misc
 
-The default network configuration assumes:
-- Board IP: `192.168.55.3`
-- Host/TFTP Server IP: `192.168.55.1`
-- Netmask: `255.255.255.0`
+### Troubleshooting
 
-Adjust these values based on your network setup.
-
-## Troubleshooting
-
-### Serial Connection Issues
+**Serial Connection Issues**
 - Verify the correct serial device (e.g., `/dev/ttyUSB0`)
 - Check user permissions: `sudo usermod -a -G dialout $USER`
 - Ensure no other program is using the serial port
 
-### TFTP Issues
+**TFTP Issues**
 - Verify TFTP server is running: `docker ps`
 - Check connectivity: `tftp localhost -c get <filename>`
 - Ensure firewall allows UDP port 69
 - Verify file exists in `binaries/`
 
-### U-Boot Not Responding
+**U-Boot Not Responding**
 - Verify board is booting from SPI NOR flash
 - Check boot mode switches
 - Press reset and watch for U-Boot prompt on serial console
 
-### Binary Files Are Small (LFS Pointers)
+**Binary Files Are Small (LFS Pointers)**
 
 If binary files in the `binaries/` directory appear to be only ~130 bytes, they are Git LFS pointer files, not the actual binaries.
 
@@ -158,13 +187,14 @@ git lfs pull --include="binaries/rdb2-spi-flash-dump.bin,binaries/fsl-image-flas
 
 After pulling, the files will be their actual size (typically 64 MB - 756 MB depending on the image).
 
-## Additional Resources
+### Network Configuration
 
-### Factory SPI Flash Backup
+The default network configuration for eMMC flashing assumes:
+- Board IP: `192.168.55.3`
+- Host/TFTP Server IP: `192.168.55.1`
+- Netmask: `255.255.255.0`
 
-A dump of the factory SPI flash image is available in `binaries/rdb2-spi-flash-dump.bin`. This can be used to restore the board to its original factory state if needed.
-
-To restore the factory image:
+Adjust these values based on your network setup when running `emmc_flash.py`.
 
 ### Reference Documentation
 
