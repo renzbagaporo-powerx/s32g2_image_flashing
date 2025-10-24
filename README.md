@@ -120,6 +120,21 @@ Adjust these values based on your network setup.
 - Check boot mode switches
 - Press reset and watch for U-Boot prompt on serial console
 
+### Binary Files Are Small (LFS Pointers)
+
+If binary files in the `binaries/` directory appear to be only ~130 bytes, they are Git LFS pointer files, not the actual binaries.
+
+To download the actual binary files:
+```bash
+# Pull all LFS files
+git lfs pull
+
+# Or pull specific files only
+git lfs pull --include="binaries/rdb2-spi-flash-dump.bin,binaries/fsl-image-flash-s32g274ardb2.flashimage"
+```
+
+After pulling, the files will be their actual size (typically 64 MB - 756 MB depending on the image).
+
 ## Additional Resources
 
 ### Factory SPI Flash Backup
