@@ -165,11 +165,9 @@ After pulling, the files will be their actual size (typically 64 MB - 756 MB dep
 A dump of the factory SPI flash image is available in `binaries/rdb2-spi-flash-dump.bin`. This can be used to restore the board to its original factory state if needed.
 
 To restore the factory image:
-```bash
-S32FlashTool -fwrite -addr 0 -i uart -p /dev/ttyUSB0 -b -f binaries/rdb2-spi-flash-dump.bin
-```
 
 ### Reference Documentation
 
 - **AN13185** - Flashing Binaries to S32G-VNP-RDB2
 - **S32G-VNP-RDB2UG** - S32G-VNP-RDB2 User Guide
+- **S32FTUG** - S32 Flash Tool User Guide
