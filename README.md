@@ -23,7 +23,7 @@ Flash the U-Boot bootloader to SPI NOR flash using the S32 Flash Tool.
 ### Hardware Setup
 
 1. Configure the board boot mode switches to boot from serial. On `S32G-VNP-RDB2UG` this is on section 3.6.
-2. Connect host to the board via it's UART0 USB port.
+2. Connect host to the board via it's UART0 USB port. The following instructions assume it appears as `/dev/ttyUSB0`.
 
 ### Flashing
 
@@ -32,9 +32,32 @@ The S32 Flash Tool is included with S32 Design Studio. On Linux, it's typically 
 /usr/local/NXP/S32DS.x.y.z/S32DS/tools/S32FlashTool/
 ```
 
-Example command to read SPI flash:
+Where x.y.z is the S32 Design Studio version. Assuming this location is exported as `S32FT_DIR`.
+
+#### Loading the flasher firmware
+
+S32 Flash Tool needs a certain firmware running on the chip for flashing onto SPI flash. Before any operation, this firmware must be uploaded to the chip first.
+
 ```bash
-S32FlashTool -fread -addr 0 -size 67108864 -i uart -p /dev/ttyUSB0 -b -f dump.bin
+$S32FT_DIR/bin/S32FlashTool -t $S32FT_DIR/targets/S32G2xx.bin -a $S32FT_DIR/flash/MX25UW51245G.bin -i uart -p /dev/ttyUSB0
+```
+
+#### Sample NXP Auto Linux BSP 44.0 image
+
+```bash
+# Erase the chip with the same size as image to flash
+$S32FT_DIR/bin/S32FlashTool -t $S32FT_DIR/targets/S32G2xx.bin -ferase -addr 0 -f ./binaries/fsl-image-flash-s32g274ardb2.flashimage -i uart -p /dev/ttyUSB0
+# Flash the iamge
+$S32FT_DIR/bin/S32FlashTool -t $S32FT_DIR/targets/S32G2xx.bin -fwrite -f ./binaries/fsl-image-flash-s32g274ardb2.flashimage -addr 0 -i uart -p /dev/ttyUSB0
+```
+
+#### Factory image
+
+```bash
+# Erase the chip with the same size as image to flash
+$S32FT_DIR/bin/S32FlashTool -t $S32FT_DIR/targets/S32G2xx.bin -ferase -addr 0 -f ./binaries/rdb2-spi-flash-dump.bin -i uart -p /dev/ttyUSB0
+# Flash the image
+$S32FT_DIR/bin/S32FlashTool -t $S32FT_DIR/targets/S32G2xx.bin -fwrite -f ./binaries/rdb2-spi-flash-dump.bin -addr 0 -i uart -p /dev/ttyUSB0
 ```
 
 ## Method 2: eMMC Flash
