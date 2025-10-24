@@ -123,11 +123,18 @@ Adjust these values based on your network setup.
 - Check boot mode switches
 - Press reset and watch for U-Boot prompt on serial console
 
-## References
+## Additional Resources
+
+### Factory SPI Flash Backup
+
+A dump of the factory SPI flash image is available in `tftp_server/binaries/rdb2-spi-flash-dump.bin`. This can be used to restore the board to its original factory state if needed.
+
+To restore the factory image:
+```bash
+S32FlashTool -fwrite -addr 0 -i uart -p /dev/ttyUSB0 -b -f tftp_server/binaries/rdb2-spi-flash-dump.bin
+```
+
+### Reference Documentation
 
 - **AN13185** - Flashing Binaries to S32G-VNP-RDB2
 - **S32G-VNP-RDB2UG** - S32G-VNP-RDB2 User Guide
-
-## Misc
-
-- There is a dump of the factory SPI flash image that comes with the board in `tftp_server/binaries/rdb2-spi-flash-dump.bin`.
